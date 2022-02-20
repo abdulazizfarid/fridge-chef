@@ -1,0 +1,158 @@
+<resources>
+    <string name="app_name">Fridge - Enhance the chef within</string>
+    <string name="success">SUCCESS!</string>
+    <string name="fridge_enhance_the_chef_within">Fridge - Enhance the chef within</string>
+    <string name="NoMatchString">There are currently no recipes that can be made with these ingredients in our database\n\nWe are adding new Recipes everyday, check again after an update for more results :)\n\nOr you can go back and try adding more ingredients.</string>
+    <string-array name="fruit_list">
+        <item>Tomato</item>
+        <item>Cherry</item>
+        <item>Banana</item>
+        <item>Avocado</item>
+        <item>Beans</item>
+        <item>Black Olives</item>
+        <item>Lime</item>
+        <item>Lemon</item>
+        <item>Green Chilli</item>
+        <item>Guava</item>
+        <item>Pear</item>
+    </string-array>
+
+    <string-array name="dairy_list">
+        <item>Milk</item>
+        <item>Cheddar</item>
+        <item>Mozzarella</item>
+        <item>Egg</item>
+        <item>Butter</item>
+        <item>Feta</item>
+        <item>Yogurt</item>
+        <item>Cream</item>
+    </string-array>
+
+    <string-array name="dry_fruits_list">
+        <item>Cashew</item>
+        <item>Walnut</item>
+        <item>Almond</item>
+        <item>Pistachio</item>
+        <item>Raisin</item>
+        <item>Hazelnut</item>
+    </string-array>
+
+    <string-array name="herbs_list">
+        <item>Coriander</item>
+        <item>Mint</item>
+        <item>Thyme</item>
+        <item>Parsley</item>
+        <item>Oregano</item>
+        <item>Sage</item>
+        <item>Basil</item>
+        <item>Dill</item>
+        <item>Cilantro</item>
+        <item>Bay Leaves</item>
+        <item>Rosemary</item>
+    </string-array>
+
+    <string-array name="meat_list">
+        <item>Chicken</item>
+        <item>Beef</item>
+        <item>Mutton</item>
+        <item>Fish</item>
+        <item>Bacon</item>
+    </string-array>
+
+    <string-array name="others_list">
+        <item>Flour</item>
+        <item>Corn Flour</item>
+        <item>Rice</item>
+        <item>Sugar</item>
+        <item>Olive Oil</item>
+        <item>Honey</item>
+        <item>Veg Oil</item>
+        <item>Sunflower Oil</item>
+        <item>Tortilla Wrap</item>
+        <item>Crackers</item>
+        <item>Chicken Stock</item>
+        <item>Beef Stock</item>
+        <item>Bread</item>
+        <item>Rusk</item>
+        <item>Naan</item>
+        <item>Pickels</item>
+        <item>Bread Crumbs</item>
+        <item>Meat Tenderizer</item>
+        <item>Jelly</item>
+        <item>Peanut Butter</item>
+        <item>Water</item>
+        <item>Tea</item>
+        <item>Coffee</item>
+    </string-array>
+
+    <string-array name="pp_list">
+        <item>Garlic Powder</item>
+        <item>Garlic Paste</item>
+        <item>Ginger Paste</item>
+        <item>Ginger and Garlic Paste</item>
+        <item>Tomato Paste</item>
+        <item>Tomato Puree</item>
+        <item>Chicken Powder</item>
+        <item>Black Pepper Powder</item>
+        <item>White Pepper Powder</item>
+        <item>Whole Spice Powder</item>
+        <item>Coriander Powder</item>
+    </string-array>
+
+    <string-array name="ss_list">
+        <item>Italian</item>
+        <item>Fajita</item>
+        <item>Mexican</item>
+        <item>Hot Chilli Sauce</item>
+        <item>Sarircha Sauce</item>
+        <item>Soy Sauce</item>
+        <item>Vinegar</item>
+    </string-array>
+
+    <string-array name="spices_list">
+        <item>Black Pepper</item>
+        <item>Chilli Powder</item>
+        <item>Chilli Flakes</item>
+        <item>Paprika</item>
+        <item>Tumeric</item>
+        <item>Saffron</item>
+        <item>Cumin</item>
+        <item>FenuGreek</item>
+        <item>Garam Masala</item>
+        <item>Chaat Masala</item>
+        <item>All Spices</item>
+        <item>White Pepper</item>
+        <item>Coriander Whole</item>
+        <item>Salt</item>
+    </string-array>
+
+    <string-array name="vegetables_list">
+        <item>Corn</item>
+        <item>Mushroom</item>
+        <item>Carrot</item>
+        <item>Cabbage</item>
+        <item>Bell Pepper</item>
+        <item>Garlic</item>
+        <item>Ginger</item>
+        <item>Onion</item>
+        <item>Cucumber</item>
+        <item>Eggplant</item>
+        <item>Broccoli</item>
+        <item>Cauliflower</item>
+        <item>Zucchini</item>
+    </string-array>
+
+    <string-array name="recipe_list">
+        <item>Alfredo Pasta</item>
+        <item>Huevos rancheros</item>
+        <item>Hot&amp;Sour Soup</item>
+        <item>Zucchini slice</item>
+        <item>Chicken Tagine</item>
+        <item>Malai Boti</item>
+        <item>Chicken Nuggets</item>
+        <item>PB&amp;J Sandwich</item>
+        <item>Instant Coffee</item>
+        <item>Water</item>
+    </string-array>
+    -->
+</resources>
