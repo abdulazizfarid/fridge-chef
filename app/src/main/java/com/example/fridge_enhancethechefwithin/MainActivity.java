@@ -25,7 +25,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
    /* public static String ip = "192.168.18.36";
     public static String port = "1433";
     //public static String classes = "com.mysql.jdbc.Driver";
@@ -49,12 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //noinspection deprecation
-
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.txtTitle);
+        CardHome = (CardView) findViewById(R.id.HomeCard);
+
+        //textView = findViewById(R.id.txtTitle);
         /*
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -74,42 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
         */
-        CardHome = (CardView) findViewById(R.id.HomeCard);
-        CardHome.setOnClickListener(this);
-
     }
-
-    @Override
-    public void onClick(View v) {
+    public void login(View v){
         Intent i;
-        i= new Intent(this,Home.class);
+        i = new Intent(getBaseContext(), Home.class);
         startActivity(i);
-
     }
-   /* @Override
-    public void onClick(View v) {
-
-
-
-        /*if (connection != null) {
-            textView.setText("Connected");
-            Statement statement = null;
-            try {
-                statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT docid FROM Doctor;");
-                //TimeUnit.SECONDS.sleep(5);
-                while (resultSet.next()) {
-                    textView.setText(resultSet.getString(1));
-
-                }
-            } catch (SQLException e) {
-                textView.setText("Disconnected");
-                e.printStackTrace();
-            }
-
-        } else {
-            textView.setText("Failed");
-        }
-
-    }*/
 }
