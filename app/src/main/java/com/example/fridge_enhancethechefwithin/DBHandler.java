@@ -1,37 +1,103 @@
 package com.example.fridge_enhancethechefwithin;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-public class DBHelper extends SQLiteOpenHelper {
-    public static String dbname="Fridge";
+public class DBHandler extends SQLiteOpenHelper{
+    public static final int dbVersion = 1;
+    public static final String dbPath = "/data/data/com.example.fridge_enhancethechefwithin/databases/";
+    public static final String dbName ="Fridge";
+    SQLiteDatabase myDatabase;
+    private final Context mContext;
 
-    public DBHelper( Context context) {
-        super(context, dbname, null, 1 );
+    public DBHandler(Context context) {
+        super(context, dbName, null, dbVersion );
+        this.mContext = context;
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void copyDatabase() throws IOException {
+
+        //Open your local db as the input stream
+        InputStream myInput = mContext.getAssets().open(dbName);// + ".db");
+
+        // Path to the just created empty db
+        String outFileName = dbPath + dbName;
+
+        //Open the empty db as the output stream
+        OutputStream myOutput = new FileOutputStream(outFileName);
+
+        //transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer))>0){
+            myOutput.write(buffer, 0, length);
+        }
+
+        //Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
+
+    }
+
+    public void createDatabase() throws IOException{
+        boolean exists = checkDatabase();
+        if(!exists) {
+            try {
+                this.getReadableDatabase();
+                this.close();
+                copyDatabase();
+            } catch (Exception exc){
+                exc.printStackTrace();
+            } /*catch (IOException mIOException){
+                mIOException.printStackTrace();
+                throw new Error("Error copying DB");
+            } */finally {
+                this.close();
+            }
+        }
     }
 
     @Override
-    public void onCreate(SQLiteDatabase DB) {
-        //DB.execSQL("CREATE TABLE Fruits (F_ID int PRIMARY KEY, name TEXT)");
-        //DB.execSQL("CREATE TABLE Meat (M_ID int PRIMARY KEY, name TEXT)");
-        //DB.execSQL("CREATE TABLE Sample (id int PRIMARY KEY, name TEXT)");
-
+    public synchronized void close(){
+        if(myDatabase != null)
+            myDatabase.close();
+        SQLiteDatabase.releaseMemory();
+        super.close();
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        //DB.execSQL("DROP TABLE IF EXISTS Fruits");
-        //DB.execSQL("DROP TABLE IF EXISTS Meat");
-        //DB.execSQL("DROP TABLE IF EXISTS Sample");
+    public void onCreate(SQLiteDatabase DB) {}
 
+    @Override
+    public void onUpgrade(SQLiteDatabase DB, int i, int i1) {}
+
+    private boolean checkDatabase(){
+        try{
+            final String mPath = dbPath + dbName;
+            final File file = new File(mPath);
+            if (file.exists()) return true;
+            else return false;
+        } catch (SQLiteException e){
+            e.printStackTrace();
+            return false;
+        }
     }
-
 
     public Cursor getID(){
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -54,37 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor = DB.rawQuery("SELECT name from ingredients where ingredient_ID='999'",null);
         return cursor;
     }
-    /*public Cursor getRecipes(){
-        SQLiteDatabase DB = this.getWritableDatabase();
-        int n = Home.SelectedID.size();
-        Cursor cursor=null;
-        if (!Home.SelectedID.isEmpty()) {
-        String query = "select count(*) as rowcount , r.recipe_id, r.recipe_name, r.instructions\n" +
-                "from \n" +
-                "    Recipes r\n" +
-                "    inner join recipe_ingredient ri\n" +
-                "    on ri.rec_id = r.recipe_id\n" +
-                "where ri.ing_id IN \n(";
-                for (int i = 0; i < n; i++) {
-                    if (i < (n - 1)) {
-                        query = query + "'" + Home.SelectedID.get(i) + "',";
-                    } else if (i == (n - 1)) {
-                        query = query + "'" + Home.SelectedID.get(i) + "')\n";
-                    }
-                }
-                query = query + "AND \n" +
-                "r.recipe_id IN (select rec_id \n" +
-                "from recipe_ingredient\n" +
-                "group by rec_id\n" +
-                "having count(*) >= " + n + ")\n" +
-                "GROUP BY r.recipe_name\n" +
-                "having rowcount >= " + n + ";";
-            cursor = DB.rawQuery(query,null);
-            return cursor;
-        }
-        cursor = DB.rawQuery("SELECT name from ingredients where ingredient_ID='999'",null);
-        return cursor;
-    }*/
+
     public Cursor getRecipes(){
         SQLiteDatabase DB = this.getWritableDatabase();
         int n = Home.SelectedID.size();
@@ -139,4 +175,5 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+
 }

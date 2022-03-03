@@ -21,18 +21,19 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class Home extends AppCompatActivity implements View.OnClickListener, MultipleList.onMultiChoiceListener {
+public class Home extends AppCompatActivity implements View.OnClickListener, IngredientListDialog.onMultiChoiceListener {
 
     public CardView CardFruits, CardVegetables, CardMeat, CardHerb, CardSpices, CardSeasoningSauces,
             CardDairy, CardDryFruits, CardPowderPaste, CardOthers;
-    DBHelper DB = new DBHelper(this);
+    DBHandler DB;
+    //DBHandler DB = new DBHandler(getApplicationContext(), null, null, 1);
     CardView SubmitCard;
     public LinearLayout HomeLayout;
     public static String Category = new String();
     public static String [] flist= new String[20];
     //public static String [] RecipeNames= new String[10];
     //public static String [] RecipeInstructions = new String[10];
-    MultipleList.onMultiChoiceListener FruitListener;
+    IngredientListDialog.onMultiChoiceListener FruitListener;
     public static ArrayList<String> Selected = new ArrayList<>();
     public static ArrayList<String> SelectedID = new ArrayList<>();
     public static StringBuffer buffer = new StringBuffer();
@@ -45,6 +46,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        DB = new DBHandler(this);
         HomeLayout=findViewById(R.id.HomeLayout);
         CardFruits = (CardView) findViewById(R.id.CardFruits);
         CardVegetables = (CardView) findViewById(R.id.CardVegetables);
@@ -63,7 +65,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View view) {
                 Category="Fruits";
-                MultipleList multiChoiceDialog = new MultipleList();
+                IngredientListDialog multiChoiceDialog = new IngredientListDialog();
                 multiChoiceDialog.setCancelable(false);
                 multiChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
 
@@ -74,7 +76,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View view) {
                 Category="Vegetables";
-                DialogFragment HerbChoiceDialog = new MultipleList();
+                DialogFragment HerbChoiceDialog = new IngredientListDialog();
                 HerbChoiceDialog.setCancelable(false);
                 HerbChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
 
@@ -85,7 +87,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View view) {
                 Category="Meat";
-                DialogFragment MeatChoiceDialog = new MultipleList();
+                DialogFragment MeatChoiceDialog = new IngredientListDialog();
                 MeatChoiceDialog.setCancelable(false);
                 MeatChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -94,7 +96,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="Herbs";
-                DialogFragment HerbChoiceDialog = new MultipleList();
+                DialogFragment HerbChoiceDialog = new IngredientListDialog();
                 HerbChoiceDialog.setCancelable(false);
                 HerbChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -103,7 +105,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="Spices";
-                DialogFragment SpicesChoiceDialog = new MultipleList();
+                DialogFragment SpicesChoiceDialog = new IngredientListDialog();
                 SpicesChoiceDialog.setCancelable(false);
                 SpicesChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -112,7 +114,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="SeasoningSauces";
-                DialogFragment SeasoningSaucesDialog = new MultipleList();
+                DialogFragment SeasoningSaucesDialog = new IngredientListDialog();
                 SeasoningSaucesDialog.setCancelable(false);
                 SeasoningSaucesDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -121,7 +123,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="Dairy";
-                DialogFragment DairyChoiceDialog = new MultipleList();
+                DialogFragment DairyChoiceDialog = new IngredientListDialog();
                 DairyChoiceDialog.setCancelable(false);
                 DairyChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -130,7 +132,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="DryFruits";
-                DialogFragment DryFruitChoiceDialog = new MultipleList();
+                DialogFragment DryFruitChoiceDialog = new IngredientListDialog();
                 DryFruitChoiceDialog.setCancelable(false);
                 DryFruitChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -139,7 +141,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="PowderPastes";
-                DialogFragment PowderPastesDialog = new MultipleList();
+                DialogFragment PowderPastesDialog = new IngredientListDialog();
                 PowderPastesDialog.setCancelable(false);
                 PowderPastesDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -148,7 +150,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
             @Override
             public void onClick(View v) {
                 Category="Others";
-                DialogFragment OtherChoiceDialog = new MultipleList();
+                DialogFragment OtherChoiceDialog = new IngredientListDialog();
                 OtherChoiceDialog.setCancelable(false);
                 OtherChoiceDialog.show(getSupportFragmentManager(), "Multichoice Dialog: ");
             }
@@ -211,12 +213,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Mul
     }
 
     @Override
-    public void onPositiveButtonClicked(String[] fruit_list, ArrayList<String> SelectedFruits) {
-
-    }
+    public void onPositiveButtonClicked(ArrayList<String> SelectedFruits) {}
 
     @Override
-    public void onNegativeButtonClicked() {
-
-    }
+    public void onNegativeButtonClicked() {}
 }
