@@ -52,80 +52,47 @@ public class MainActivity extends AppCompatActivity {
     public static String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;user=%s;password=%s;sslProtocol=TLSv1.2",ip, port, database, username, password);
     public static Connection connection = null; */
     //public static String url = "jdbc:jtds:sqlserver://"+ip+":"+port+";"+"databasename="+database+"; user="+username+"; password="+password+";";
-    public CardView CardHome;
-
-    TextView txtHome;
     ArrayList<String> list;
     DBHandler DB;
     boolean auth = false;
     Cursor usr;
     String mode = "";
+    public static ArrayList<String> RecipeNames = new ArrayList<>();
+    public static ArrayList<String> RecipeInstructions = new ArrayList<>();
+    public static ArrayList<String> RecipeIngredients = new ArrayList<>();
+    public CardView CardHome;
+    EditText etEmail;
+    EditText etPassword;
+    public TextView txtHome;
+    CardView logoutCard;
+    CardView favCard;
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor spEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DB = new DBHandler(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        DB = new DBHandler(this);
         CardHome = (CardView) findViewById(R.id.HomeCard);
-        EditText etEmail = (EditText) findViewById(R.id.etEmail);
-        EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
         txtHome = (TextView) findViewById(R.id.txtHome);
-        final String password = "";
-        SharedPreferences sharedPrefs = getSharedPreferences("file", MODE_PRIVATE);
+        logoutCard = (CardView) findViewById(R.id.logoutCard);
+        favCard = (CardView) findViewById(R.id.favCard);
+        sharedPrefs = getSharedPreferences("file", MODE_PRIVATE);
+        spEdit = sharedPrefs.edit();
+
         boolean valueFromSharedPrefs = sharedPrefs.getBoolean("isUserLoggedIn", false);
         if (valueFromSharedPrefs) {
-            SharedPreferences.Editor spEdit = sharedPrefs.edit();
-            CardView logoutCard = (CardView) findViewById(R.id.logoutCard);
-            CardView favCard = (CardView) findViewById(R.id.favCard);
             logoutCard.setVisibility(View.VISIBLE);
             favCard.setVisibility(View.VISIBLE);
-
-            logoutCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    spEdit.putBoolean("isUserLoggedIn", false);
-                    spEdit.putString("userEmail", "");
-                    Toast.makeText(getBaseContext(),"Logged out!", Toast.LENGTH_SHORT).show();
-                    etEmail.setVisibility(View.VISIBLE);
-                    etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View view, boolean hasFocus) {
-                            if (!hasFocus) {
-                                //Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_SHORT).show();
-                                usr = DB.getAuth(etEmail.getText().toString());
-                                if (usr.getCount()!=0){
-                                    etPassword.setHint("Enter your password");
-                                    etPassword.setVisibility(View.VISIBLE);
-                                    txtHome.setText("Login");
-                                    mode = "login";
-                                }
-                                else{
-                                    etPassword.setHint("Enter new password");
-                                    etPassword.setVisibility(View.VISIBLE);
-                                    txtHome.setText("Signup");
-                                    mode = "signup";
-                                }
-
-                            }
-                        }
-                    });
-                    //etPassword.setVisibility(View.VISIBLE);
-                    logoutCard.setVisibility(View.INVISIBLE);
-                    favCard.setVisibility(View.INVISIBLE);
-                }
-            });
-
-            favCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO
-                }
-            });
             Toast.makeText(this,"Welcome back!", Toast.LENGTH_SHORT).show();
             etEmail.setVisibility(View.INVISIBLE);
             etPassword.setVisibility(View.INVISIBLE);
         }
+
         /*textView = findViewById(R.id.txtTitle);
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
@@ -149,6 +116,65 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Toast.makeText(this, "Resumed", Toast.LENGTH_SHORT).show();
+        boolean valueFromSharedPrefs = sharedPrefs.getBoolean("isUserLoggedIn", false);
+        if (valueFromSharedPrefs) {
+            logoutCard.setVisibility(View.VISIBLE);
+            favCard.setVisibility(View.VISIBLE);
+            etEmail.setVisibility(View.INVISIBLE);
+            etPassword.setVisibility(View.INVISIBLE);
+        }
+        txtHome.setText("Let's Get Started");
+    }
+
+    public void logout(View v) {
+        spEdit.putBoolean("isUserLoggedIn", false);
+        spEdit.putString("userEmail", "");
+        Toast.makeText(getBaseContext(),"Logged out!", Toast.LENGTH_SHORT).show();
+        etEmail.setVisibility(View.VISIBLE);
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    //Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_SHORT).show();
+                    usr = DB.getAuth(etEmail.getText().toString());
+                    if (usr.getCount()!=0){
+                        etPassword.setHint("Enter your password");
+                        etPassword.setVisibility(View.VISIBLE);
+                        txtHome.setText("Login");
+                        mode = "login";
+                    }
+                    else{
+                        etPassword.setHint("Enter new password");
+                        etPassword.setVisibility(View.VISIBLE);
+                        txtHome.setText("Signup");
+                        mode = "signup";
+                    }
+
+                }
+            }
+        });
+        //etPassword.setVisibility(View.VISIBLE);
+        logoutCard.setVisibility(View.INVISIBLE);
+        favCard.setVisibility(View.INVISIBLE);
+    }
+
+    public void getFavs(View v) {
+        Cursor res = DB.getFavorites(sharedPrefs.getString("userEmail", "x"));
+        while (res.moveToNext()){
+            RecipeNames.add(res.getString(0));
+            RecipeInstructions.add(res.getString(1));
+            RecipeIngredients.add(res.getString(2));
+        }
+        Intent i = new Intent(getBaseContext(), Results.class);
+        i.putExtra("mode", "favorite");
+        startActivity(i);
+    }
+
     public void next(View v){
 
         SharedPreferences sharedPrefs = getSharedPreferences("file", MODE_PRIVATE);

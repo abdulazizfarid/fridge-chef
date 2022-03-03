@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,18 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         Resources resources = getResources();
+        String mode = getIntent().getStringExtra("mode");
+        if (mode.equals("favorite")){
+            TextView txt = findViewById(R.id.txtCategories);
+            txt.setText("Favorites");
+            if (MainActivity.RecipeIngredients.size()!=0){
+                Home.RecipeIngredients = MainActivity.RecipeIngredients;
+                Home.RecipeNames = MainActivity.RecipeNames;
+                Home.RecipeInstructions = MainActivity.RecipeInstructions;
+            }else{
+                NoMatchFound.setText("You have not chosen any favorites");
+            }
+        }
         final String[] recipe_list = resources.getStringArray(R.array.recipe_list);
        // for (int i=0;i<=9;i++) RecipeNames[i]="";
 
@@ -238,6 +251,12 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                builder.show();
             }
         });
+    }
+
+    public void setFav(View v){
+        String a = getResources().getResourceName(v.getId()).toString();
+        String b = getResources().getResourceEntryName(v.getId()).toString();
+        Log.i("id:", String.valueOf(v.getId()));
     }
 
     @Override

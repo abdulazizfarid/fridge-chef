@@ -206,8 +206,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Ing
         Selected.clear();
         //if (buffer.length()==0) Snackbar.make(HomeLayout,"No Entry",Snackbar.LENGTH_LONG).show();
         //else {
-            Intent i;
-            i= new Intent(this,Results.class);
+            Intent i = new Intent(this,Results.class);
+            i.putExtra("mode", "recipe");
             startActivity(i);
         //}
     }
