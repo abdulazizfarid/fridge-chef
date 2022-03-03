@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -53,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
     //public static String url = "jdbc:jtds:sqlserver://"+ip+":"+port+";"+"databasename="+database+"; user="+username+"; password="+password+";";
     public CardView CardHome;
 
-    TextView textView;
+    TextView txtHome;
     ArrayList<String> list;
     DBHandler DB;
-
+    boolean auth = false;
+    Cursor usr;
+    String mode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         CardHome = (CardView) findViewById(R.id.HomeCard);
         EditText etEmail = (EditText) findViewById(R.id.etEmail);
         EditText etPassword = (EditText) findViewById(R.id.etPassword);
-
+        txtHome = (TextView) findViewById(R.id.txtHome);
+        final String password = "";
         SharedPreferences sharedPrefs = getSharedPreferences("file", MODE_PRIVATE);
         boolean valueFromSharedPrefs = sharedPrefs.getBoolean("isUserLoggedIn", false);
         if (valueFromSharedPrefs) {
@@ -88,7 +92,20 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFocusChange(View view, boolean hasFocus) {
                             if (!hasFocus) {
-                                Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_SHORT).show();
+                                usr = DB.getAuth(etEmail.getText().toString());
+                                if (usr.getCount()!=0){
+                                    etPassword.setHint("Enter your password");
+                                    etPassword.setVisibility(View.VISIBLE);
+                                    txtHome.setText("Login");
+                                    mode = "login";
+                                }
+                                else{
+                                    etPassword.setHint("Enter new password");
+                                    etPassword.setVisibility(View.VISIBLE);
+                                    txtHome.setText("Signup");
+                                    mode = "signup";
+                                }
 
                             }
                         }
@@ -132,26 +149,33 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
     }
-    public void login(View v){
+    public void next(View v){
 
         SharedPreferences sharedPrefs = getSharedPreferences("file", MODE_PRIVATE);
         SharedPreferences.Editor spEdit = sharedPrefs.edit();
-
-        EditText etEmail = (EditText) findViewById(R.id.etEmail);
         EditText etPassword = (EditText) findViewById(R.id.etPassword);
-        TextView txtBtn = (TextView) findViewById(R.id.txtHome);
-        String email = etEmail.getText().toString();
-        String pass = etPassword.getText().toString();
-        if(email.equals("abc@gmail.com") && pass.equals("abcd")){
-            spEdit.putString("userEmail", "abc@gmail.com");
+        EditText etEmail = (EditText) findViewById(R.id.etEmail);
+        if (mode.equals("login")){
+            usr.moveToFirst();
+            if (etPassword.getText().toString() != null && usr.getString(1).equals(etPassword.getText().toString()))
+                auth = true;
+        }
+        else if (mode.equals("signup")){
+            DB.signup(etEmail.getText().toString(), etPassword.getText().toString());
+            auth = true;
+        }
+
+        if(auth){
+            spEdit.putString("userEmail", etEmail.getText().toString());
             spEdit.putBoolean("isUserLoggedIn", true);
             spEdit.apply();
-            Intent i;
-            i = new Intent(getBaseContext(), Home.class);
+            Intent i = new Intent(getBaseContext(), Home.class);
             startActivity(i);
 
         }
     }
+
+    //Copy pasted code to remove focus on touch outside EditText
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {

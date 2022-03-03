@@ -100,7 +100,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:onClick="login"
+        android:onClick="next"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
@@ -123,9 +123,8 @@
                 android:fontFamily="cursive"
                 android:text=" Let's Get Started "
                 android:textColor="#C81010"
-                android:textSize="26sp"
 
-                />
+                android:textSize="26sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.PreparedStatement;
 
 public class DBHandler extends SQLiteOpenHelper{
     public static final int dbVersion = 1;
@@ -176,4 +177,29 @@ public class DBHandler extends SQLiteOpenHelper{
         return cursor;
     }
 
+    public Cursor getAuth(String email){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        try{
+            Cursor cursor = DB.rawQuery("SELECT * FROM Users WHERE email = '" + email + "'", null);
+            return cursor;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void signup(String email, String password){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        try{
+            DB.execSQL("INSERT INTO Users (email, password) VALUES (?,?)",new Object[]{email, password});
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public Cursor getFavorites(String email){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("SELECT recipe_name, ingredients, instructions FROM Recipes WHERE recipe_id IN (SELECT recipeId FROM UserFavorites WHERE userEmail = ?)", new String[]{email});
+        return cursor;
+    }
 }
