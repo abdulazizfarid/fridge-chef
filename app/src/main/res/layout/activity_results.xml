@@ -96,7 +96,8 @@
                             android:visibility="visible"
                             app:cardBackgroundColor="#FFFFFF"
                             app:cardCornerRadius="20dp"
-                            app:cardElevation="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
                             app:contentPaddingBottom="5dp"
                             app:contentPaddingLeft="5dp"
                             app:contentPaddingRight="5dp"
@@ -104,9 +105,8 @@
 
                             <ImageView
                                 android:id="@+id/favImg0"
-                                android:layout_width="40px"
-                                android:layout_height="40px"
-                                android:onClick="setFav"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
                                 app:srcCompat="@drawable/fav_ico" />
                         </androidx.cardview.widget.CardView>
                         <ImageView
@@ -176,9 +176,10 @@
                             android:layout_height="wrap_content"
                             android:elevation="20dp"
                             android:visibility="visible"
-                            app:cardBackgroundColor="#000000"
+                            app:cardBackgroundColor="#FFFFFF"
                             app:cardCornerRadius="20dp"
-                            app:cardElevation="20dp"
+                            android:onClick="setFav"
+                            app:cardElevation="0dp"
                             app:contentPaddingBottom="5dp"
                             app:contentPaddingLeft="5dp"
                             app:contentPaddingRight="5dp"
@@ -186,9 +187,8 @@
 
                             <ImageView
                                 android:id="@+id/favImg1"
-                                android:layout_width="40px"
-                                android:layout_height="40px"
-                                android:onClick="setFav"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
                                 app:srcCompat="@drawable/fav_ico" />
                         </androidx.cardview.widget.CardView>
                     </FrameLayout>
@@ -234,6 +234,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg2"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -278,6 +299,27 @@
                             android:textColor="#C81010"
                             android:textSize="24sp"
                             android:layout_gravity="center_horizontal"/>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg3"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -321,6 +363,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:onClick="setFav"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg4"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -364,6 +427,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg5"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -407,6 +491,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg6"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -450,6 +555,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg7"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -493,6 +619,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg8"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -536,6 +683,27 @@
                             android:textAlignment="center"
                             android:textColor="#C81010"
                             android:textSize="24sp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/favCard9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="20dp"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            android:onClick="setFav"
+                            app:contentPaddingBottom="5dp"
+                            app:contentPaddingLeft="5dp"
+                            app:contentPaddingRight="5dp"
+                            app:contentPaddingTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/favImg9"
+                                android:layout_width="60px"
+                                android:layout_height="60px"
+                                app:srcCompat="@drawable/fav_ico" />
+                        </androidx.cardview.widget.CardView>
                     </FrameLayout>
 
                 </LinearLayout>

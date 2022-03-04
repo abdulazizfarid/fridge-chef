@@ -202,4 +202,29 @@ public class DBHandler extends SQLiteOpenHelper{
         Cursor cursor = DB.rawQuery("SELECT recipe_name, ingredients, instructions FROM Recipes WHERE recipe_id IN (SELECT recipeId FROM UserFavorites WHERE userEmail = ?)", new String[]{email});
         return cursor;
     }
+
+    public Cursor getFavId(String email){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("SELECT recipeId FROM UserFavorites WHERE userEmail = '" + email + "'", null);
+        return cursor;
+    }
+
+    public void setFav(String email, int recipeId){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        try{
+            DB.execSQL("INSERT INTO UserFavorites (userEmail, recipeId) VALUES (?,?)",new Object[]{email, recipeId});
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFav(String email, int recipeId){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        try{
+            //DB.execSQL("DELETE FROM UserFavorites WHERE userEmail = ? AND recipeId = ?",new Object[]{email, recipeId});
+            DB.delete("UserFavorites", "userEmail = '" + email + "' AND recipeId = '" + recipeId + "'", null);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
