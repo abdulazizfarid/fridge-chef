@@ -713,7 +713,7 @@
 
         </GridLayout>
         </ScrollView>
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/BackCard"
             android:layout_width="300dp"
             android:layout_height="50dp"

@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View v) {
         spEdit.putBoolean("isUserLoggedIn", false);
         spEdit.putString("userEmail", "");
+        spEdit.apply();
         Toast.makeText(getBaseContext(),"Logged out!", Toast.LENGTH_SHORT).show();
         etEmail.setVisibility(View.VISIBLE);
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -141,7 +142,14 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
                     //Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_SHORT).show();
-                    usr = DB.getAuth(etEmail.getText().toString());
+                    String email = etEmail.getText().toString();
+                    if (email != null && email.contains("@"))
+                        usr = DB.getAuth(email);
+                    else if(email == null)
+                        Toast.makeText(getBaseContext(),"Email can not be empty", Toast.LENGTH_SHORT).show();
+                    else if(!email.contains("@"))
+                        Toast.makeText(getBaseContext(),"Please enter a valid email", Toast.LENGTH_SHORT).show();
+
                     if (usr.getCount()!=0){
                         etPassword.setHint("Enter your password");
                         etPassword.setVisibility(View.VISIBLE);
