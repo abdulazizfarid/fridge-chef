@@ -217,4 +217,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Ing
 
     @Override
     public void onNegativeButtonClicked() {}
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }

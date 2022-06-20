@@ -32,6 +32,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
     Home obj = new Home();
     DBHandler DB;
     ArrayList<Integer> FavIds = new ArrayList<Integer>();
+    String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_results);
         Resources resources = getResources();
         DB = new DBHandler(this);
-        String mode = getIntent().getStringExtra("mode");
+        mode = getIntent().getStringExtra("mode");
         TextView txt = findViewById(R.id.txtCategories);
         NoMatchFound = findViewById(R.id.txtNoMatch);
         if (mode.equals("favorite")){
@@ -140,155 +141,24 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 }
             }
         }
-        RecipeCard[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[0].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
 
-        RecipeCard[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[1].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[2].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[3].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[4].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[5].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[6].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[7].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuffer buffer = new StringBuffer();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-                builder.setCancelable(true);
-                String title= (String) RecipeText[8].getText();
-                builder.setTitle(title);
-                buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-                buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-
-        RecipeCard[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               StringBuffer buffer = new StringBuffer();
-               AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
-               builder.setCancelable(true);
-               String title= (String) RecipeText[9].getText();
-               builder.setTitle(title);
-               buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
-               buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
-               builder.setMessage(buffer.toString());
-               builder.show();
-            }
-        });
+        for (int i = 0; i < 10; i++){
+            int finalI = i;
+            RecipeCard[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringBuffer buffer = new StringBuffer();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Results.this);
+                    builder.setCancelable(true);
+                    String title= (String) RecipeText[finalI].getText();
+                    builder.setTitle(title);
+                    buffer.append("Ingredients:\n" + Home.RecipeIngredients.get(Home.RecipeNames.indexOf(title)));
+                    buffer.append("\n\nInstructions: \n" + Home.RecipeInstructions.get(Home.RecipeNames.indexOf(title)));
+                    builder.setMessage(buffer.toString());
+                    builder.show();
+                }
+            });
+        }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -317,6 +187,19 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         Intent i;
         i= new Intent(this,Home.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent i;
+        if (mode.equals("favorite")){
+            i = new Intent(this, MainActivity.class);
+        }
+        else{
+            i = new Intent(this,Home.class);
+        }
         startActivity(i);
     }
 }

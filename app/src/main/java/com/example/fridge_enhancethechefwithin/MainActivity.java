@@ -240,4 +240,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(event);
     }
+    @Override
+    public void onBackPressed()
+    {
+        //Do nothing
+    }
 }
